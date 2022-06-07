@@ -53,12 +53,17 @@ class _HomeViewState extends State<HomeView> {
                         return ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return const TrackTile();
+                            Track track = snapshot.data!.data!.message!.body!
+                                .trackList![index].track!;
+                            return TrackTile(
+                              track: track,
+                            );
                           },
                           separatorBuilder: (context, index) {
                             return const Divider();
                           },
-                          itemCount: 10,
+                          itemCount: snapshot
+                              .data!.data!.message!.body!.trackList!.length,
                         );
                       } else {
                         return Center(

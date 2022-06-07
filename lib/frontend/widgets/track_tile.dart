@@ -1,11 +1,18 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:musixmatch/backend/models/track.dart';
 import 'package:musixmatch/frontend/views/details.dart';
 import 'package:sizer/sizer.dart';
 
 class TrackTile extends StatelessWidget {
-  const TrackTile({Key? key}) : super(key: key);
+  final Track track;
+
+  const TrackTile({
+    Key? key,
+    required this.track,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,28 +39,39 @@ class TrackTile extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(4.w),
                   ),
+                  child: const Center(
+                    child: Icon(
+                      Iconsax.music,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 5.w,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Adore You',
-                      style: GoogleFonts.nunitoSans(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.sp,
+                Expanded(
+                  flex: 7,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        track.trackName ?? 'Untitled',
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.sp,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    const Text(
-                      'Miley Cyrus',
-                    ),
-                  ],
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      const Text(
+                        'Miley Cyrus',
+                      ),
+                    ],
+                  ),
                 ),
                 const Spacer(),
                 const Icon(

@@ -37,6 +37,7 @@ dependencies:
   http: ^0.13.4
   iconsax: ^0.0.8
   liquid_pull_to_refresh: ^3.0.1
+  marquee: ^2.2.3
   sizer: ^2.0.15
   stacked_themes: ^0.3.8+1
 
