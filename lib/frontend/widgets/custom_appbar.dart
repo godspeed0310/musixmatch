@@ -7,10 +7,12 @@ import 'package:stacked_themes/stacked_themes.dart';
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? leading;
+  final List<Widget>? actions;
   const CustomAppbar({
     Key? key,
     this.title = 'Musixmatch',
     this.leading,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -46,24 +48,25 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           color: adaptiveColor,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            getThemeManager(context).setThemeMode(
-              isDarkEnabled ? ThemeMode.light : ThemeMode.dark,
-            );
-          },
-          icon: Icon(
-            isDarkEnabled ? Iconsax.sun : Iconsax.moon,
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Iconsax.save_2,
-          ),
-        ),
-      ],
+      actions: actions ??
+          [
+            IconButton(
+              onPressed: () {
+                getThemeManager(context).setThemeMode(
+                  isDarkEnabled ? ThemeMode.light : ThemeMode.dark,
+                );
+              },
+              icon: Icon(
+                isDarkEnabled ? Iconsax.sun : Iconsax.moon,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Iconsax.save_2,
+              ),
+            ),
+          ],
     );
   }
 

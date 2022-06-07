@@ -67,9 +67,7 @@ class TrackTile extends StatelessWidget {
                       SizedBox(
                         height: 1.h,
                       ),
-                      const Text(
-                        'Miley Cyrus',
-                      ),
+                      Text(track.artistName ?? 'Unknown'),
                     ],
                   ),
                 ),
@@ -82,7 +80,9 @@ class TrackTile extends StatelessWidget {
           );
         },
         openBuilder: (BuildContext _, VoidCallback __) {
-          return const DetailsView();
+          return DetailsView(
+            track: track,
+          );
         },
       ),
     );
