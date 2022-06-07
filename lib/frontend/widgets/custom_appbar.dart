@@ -5,7 +5,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({Key? key}) : super(key: key);
+  final String title;
+  final Widget? leading;
+  const CustomAppbar({
+    Key? key,
+    this.title = 'Musixmatch',
+    this.leading,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +26,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         : Colors.black;
 
     return AppBar(
+      iconTheme: IconThemeData(
+        color: adaptiveColor,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: adaptiveColor,
+      ),
+      leading: leading,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -27,7 +40,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       title: Text(
-        'Musixmatch',
+        title,
         style: GoogleFonts.nunitoSans(
           fontWeight: FontWeight.bold,
           color: adaptiveColor,
@@ -43,14 +56,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(
             isDarkEnabled ? Iconsax.sun : Iconsax.moon,
           ),
-          color: adaptiveColor,
         ),
         IconButton(
           onPressed: () {},
           icon: const Icon(
             Iconsax.save_2,
           ),
-          color: adaptiveColor,
         ),
       ],
     );

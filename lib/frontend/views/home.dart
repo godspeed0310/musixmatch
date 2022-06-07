@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:musixmatch/backend/blocs/connectivity_bloc.dart';
 import 'package:musixmatch/frontend/widgets/custom_appbar.dart';
 import 'package:musixmatch/frontend/widgets/default_system_overlay.dart';
+import 'package:musixmatch/frontend/widgets/track_tile.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -33,8 +34,15 @@ class _HomeViewState extends State<HomeView> {
                 child: Text('No internet connection'),
               );
             } else {
-              return const Center(
-                child: Text('Connected'),
+              return ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return const TrackTile();
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemCount: 10,
               );
             }
           },

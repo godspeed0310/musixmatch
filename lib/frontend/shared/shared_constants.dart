@@ -12,3 +12,5 @@ class Themes {
     scaffoldBackground: Colors.black,
   ).toTheme;
 }
+
+String apiKey = '5bbf5d2d8272c8a9741563d98a1aadaa';
