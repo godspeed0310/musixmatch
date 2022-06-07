@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:musixmatch/backend/blocs/track_lyrics_bloc.dart';
 import 'package:musixmatch/backend/models/track_details.dart';
 import 'package:musixmatch/frontend/widgets/item_card.dart';
+import 'package:musixmatch/frontend/widgets/lyrics_card.dart';
 import 'package:sizer/sizer.dart';
 
-class DetailsCard extends StatelessWidget {
+class DetailsCard extends StatefulWidget {
   final TrackDetailsResponse trackDetails;
   const DetailsCard({
     Key? key,
@@ -13,13 +15,35 @@ class DetailsCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DetailsCard> createState() => _DetailsCardState();
+}
+
+class _DetailsCardState extends State<DetailsCard> {
+  late TrackLyricsBloc _lyricsBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _lyricsBloc = TrackLyricsBloc(
+      trackId: widget.trackDetails.message!.body!.track!.trackId!,
+    );
+  }
+
+  @override
+  void dispose() {
+    _lyricsBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final trackDetailsData = trackDetails.message!.body!.track;
+    final trackDetailsData = widget.trackDetails.message!.body!.track;
     final Color adaptiveColor = Theme.of(context).brightness == Brightness.dark
         ? Colors.white
         : Colors.black;
 
     return ListView(
+      physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 5.h),
       children: [
         Column(
@@ -129,7 +153,13 @@ class DetailsCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            LyricsCard(
+              lyricsBloc: _lyricsBloc,
+            ),
           ],
         ),
       ],

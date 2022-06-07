@@ -22,15 +22,9 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
-  late ConnectivityBloc _connectivityBloc;
-  late TrackDetailsBloc _detailsBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _connectivityBloc = ConnectivityBloc();
-    _detailsBloc = TrackDetailsBloc(trackId: widget.track.trackId!);
-  }
+  late final ConnectivityBloc _connectivityBloc = ConnectivityBloc();
+  late final TrackDetailsBloc _detailsBloc =
+      TrackDetailsBloc(trackId: widget.track.trackId!);
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +44,7 @@ class _DetailsViewState extends State<DetailsView> {
               } else {
                 _detailsBloc.fetchTrackDetails();
                 return LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
                   onRefresh: () => _detailsBloc.fetchTrackDetails(),
                   child: StreamBuilder<ResponseProvider<TrackDetailsResponse>>(
                     stream: _detailsBloc.detailsStream.asBroadcastStream(),
