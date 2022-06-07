@@ -49,7 +49,7 @@ class TrackTile extends StatelessWidget {
                   width: 5.w,
                 ),
                 Expanded(
-                  flex: 7,
+                  flex: 14,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
