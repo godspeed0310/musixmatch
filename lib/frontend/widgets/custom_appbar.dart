@@ -45,6 +45,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
           color: adaptiveColor,
         ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Iconsax.save_2,
+          ),
+          color: adaptiveColor,
+        ),
       ],
     );
   }
